@@ -1,8 +1,21 @@
-body{
-    background-color: bisque;
+/**Estilo universal para agregar el mismo estilo a toda la pagina web*/
+*{
+    margin: 0;    
 }
 
+/** Se centro y dio estilo al titulo de la pagina */
 h1{
-    color: red;
+    text-align: center;
+    font-size: 4rem;
+    color: #000000;
+    text-shadow: 3px 3px 3px #ffffff;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
+/** Se le puso una imagen de fondo al body para darle un mejor estilo a la pagina */
+body{
+    background-image: url(../assets/fondo.jpg);
+    background-size: cover;
+    background-position: center;
+}
