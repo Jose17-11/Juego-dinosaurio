@@ -13,6 +13,7 @@ h1{
     margin-bottom: 50px;
 }
 
+
 /** Se le puso una imagen de fondo al body para darle un mejor estilo a la pagina */
 body{
     background-image: url(../assets/fondo.jpg);
