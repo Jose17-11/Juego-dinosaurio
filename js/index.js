@@ -252,13 +252,13 @@ function puntuacion(){
     ctx.fillText(`${nivel.marcador}`,600,50);
     ctx.fillText(`${'Score: ' + record}`,20,50);
     //Si el nivel se acavo mostrara las siguientes instrucciones
-    // if(nivel.muerto == true){
-    //     ctx.font = "20px impact";
-    //     ctx.fillStyle = '#000000';
-    //     ctx.fillText("Puntaje: " + `${nivel.marcador}`,210,200);
-    //     ctx.font = "60px impact";
-    //     ctx.fillText(`GAME OVER`,210,150);
-    // }
+    if(nivel.muerto == true){
+        ctx.font = "20px impact";
+        ctx.fillStyle = '#000000';
+        ctx.fillText("Puntaje: " + `${nivel.marcador}`,210,200);
+        ctx.font = "60px impact";
+        ctx.fillText(`GAME OVER`,210,150);
+    }
 }
 
 //---------------------------------------
