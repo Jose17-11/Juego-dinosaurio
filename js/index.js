@@ -61,7 +61,17 @@ function audioMuerto() {
     let muerto = new Audio('../audio/colision.mp3');
     muerto.play();
 }
-let i;
+
+let reproducirAudioMuerte;
+/** Se tuvo que crear esta funcion para cuando el dino reviva pueda volver sonar 
+ * el audio cuando muera el dino
+*/
+function nivelMuerto(){
+    if(nivel.muerto == false){
+        reproducirAudioMuerte = true;
+    }
+}
+
 //Funcion que entra al doumento html para detectar click sobre el html
 document.addEventListener('keydown', function(evento){
     //Si se preciona la tecla espacio llama la funcion saltar();
@@ -69,10 +79,6 @@ document.addEventListener('keydown', function(evento){
         // En este condicional se puede hacer cosas cuando el rex este vivo nuevamente
         if(nivel.muerto == false){
             saltar();
-            /* Como en este punto el rex ya esta vivo se le asigna a la variable reproducirAudioMuerte 
-                el valor de true para que pueda reproducirse una vez que muera
-            */
-            reproducirAudioMuerte = true;
         }
     //Si se preciona la tecla enter se reinician los valores de inicio y revive el dinosaurio    
     }    
@@ -297,6 +303,7 @@ function principal() {
     logicaCactus();
     logicaAve();
     logicaNube();
+    nivelMuerto();
     dibujaSuelo();
     dibujaCactus();
     dibujaAve();
