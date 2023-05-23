@@ -28,13 +28,14 @@ reiniciar.addEventListener('click', function() {
     nivel.marcador = 0;
     nivel.muerto = false;    
 });
+
 //Se crearon las variables de ancho, alto, el canvas y el contexto del juego
 let ancho = '700';
 let alto = '300';
 let canvas, ctx;
 
 //Variables de las imagenes
-let imgRex, imgCactus, imgSuelo, imgNube, imgAve;
+let imgRex, imgCactus, imgSuelo, imgNube, imgAve, audio;
 
 //Funcion que carga las imagenes que se mostraran en el juego
 function cargaImagenes (){
@@ -51,14 +52,27 @@ function cargaImagenes (){
     imgAve.src = '../assets/pajarito.png'
 }
 
+function audioBrinco() {
+    let brinco = new Audio('../audio/salto.mp3');
+    brinco.play();
+}
 
-
+function audioMuerto() {
+    let muerto = new Audio('../audio/colision.mp3');
+    muerto.play();
+}
+let i;
 //Funcion que entra al doumento html para detectar click sobre el html
 document.addEventListener('keydown', function(evento){
     //Si se preciona la tecla espacio llama la funcion saltar();
     if(evento.keyCode == 32){
+        // En este condicional se puede hacer cosas cuando el rex este vivo nuevamente
         if(nivel.muerto == false){
             saltar();
+            /* Como en este punto el rex ya esta vivo se le asigna a la variable reproducirAudioMuerte 
+                el valor de true para que pueda reproducirse una vez que muera
+            */
+            reproducirAudioMuerte = true;
         }
     //Si se preciona la tecla enter se reinician los valores de inicio y revive el dinosaurio    
     }    
@@ -73,6 +87,7 @@ document.addEventListener('keydown', function(evento){
         nivel.muerto = false;
     }
 });
+
 //Funcion que permite que cuando el usuario de click sobre la pantalla pueda saltar
 //Lo que lo hace funcionable en pantallas moviles
 document.addEventListener('click', function(event) {
@@ -189,6 +204,7 @@ function saltar(){
     if(trex.saltando == false){
     trex.saltando = true;
     trex.vy = trex.salto;
+    audioBrinco();
     }
     
 }
@@ -210,8 +226,6 @@ function gravedad (){
     }
 
 }
-
-
 function colision(){
     //Rango del eje x donde sucede la colision si el dinosaurio cae o choca con el ave
     if(cactus.x >= 45 && cactus.x <= 140 || ave.x >= 40 && ave.x <= 150){
@@ -221,6 +235,12 @@ function colision(){
             nivel.velocidad = 0;
             nube.velocidad = 0;
             ave.velocidad = 0;
+            // Se activa el audio de muerte unicamente cuando la variable reproducirAudioMuerte tiene el valor de true
+            if(reproducirAudioMuerte == true){
+                audioMuerto();
+                // Para que no se siga reproduciento aunque siga muerto el rex se le da el valor de false
+                reproducirAudioMuerte = false;
+            }
         }        
     }
 }
